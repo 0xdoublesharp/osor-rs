@@ -2,7 +2,7 @@
 
 Enable the optional `wgpu` feature and select `Backend::Wgpu { ordinal: 0 }` in
 `LoadOptions`. Burn 0.22.1 supplies WGPU tensor execution; its Rust requirement
-matches this project's pinned 1.95.0 toolchain. The feature is independent of
+matches this project's pinned 1.99.1 toolchain. The feature is independent of
 the Candle Metal and CUDA features. Normal CPU builds do not activate Burn.
 The selected adapter must identify as a GPU; CPU/software and noop adapters are
 not accepted as native GPU evidence. Current selection supports ordinal zero.

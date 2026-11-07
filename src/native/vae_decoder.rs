@@ -137,8 +137,8 @@ mod tests {
             .flatten_all()?
             .to_vec1::<f32>()?;
         let mut expected = Vec::new();
-        for plane in values.chunks_exact(8) {
-            for row in plane.chunks_exact(4) {
+        for plane in values.as_chunks::<8>().0 {
+            for row in plane.as_chunks::<4>().0 {
                 for _ in 0..2 {
                     for &value in row {
                         expected.extend([value, value]);

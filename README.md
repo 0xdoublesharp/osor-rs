@@ -32,7 +32,7 @@ The numerical recipe is pinned to [OSOR revision `d5b68e8`](https://github.com/Z
 
 ## Install
 
-Requires Rust 1.95 or newer. Add the crate to your project:
+Requires Rust 1.99 or newer. Add the crate to your project:
 
 ```toml
 [dependencies]

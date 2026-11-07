@@ -109,7 +109,14 @@ pub fn quantize_rgb_chw_f32(values: &[f32], size: ImageSize) -> Result<Vec<u8>> 
         .split_at_checked(layout.pixels)
         .ok_or_else(|| Error::InvalidInput("RGB result has an invalid channel layout".into()))?;
     let mut output = resample::zeroed::<u8>(layout.bytes)?;
-    for (((pixel, &r), &g), &b) in output.chunks_exact_mut(3).zip(red).zip(green).zip(blue) {
+    for (((pixel, &r), &g), &b) in output
+        .as_chunks_mut::<3>()
+        .0
+        .iter_mut()
+        .zip(red)
+        .zip(green)
+        .zip(blue)
+    {
         for (byte, value) in pixel.iter_mut().zip([r, g, b]) {
             *byte = (value.clamp(0.0, 1.0) * 255.0) as u8;
         }
@@ -165,8 +172,10 @@ pub fn reference_output_rgb8(
     if let Some((alpha, alpha_size)) = paste_back_alpha {
         let alpha = resize_alpha8(alpha, alpha_size, original_size)?;
         for ((output, source), &alpha) in result
-            .chunks_exact_mut(3)
-            .zip(original.chunks_exact(3))
+            .as_chunks_mut::<3>()
+            .0
+            .iter_mut()
+            .zip(original.as_chunks::<3>().0)
             .zip(&alpha)
         {
             let alpha = u32::from(alpha);

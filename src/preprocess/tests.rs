@@ -112,10 +112,12 @@ fn reference_inputs_use_independent_mask_geometry_and_preserve_gray() -> Result<
     assert!(
         resized
             .image_rgb8
-            .chunks_exact(3)
-            .all(|rgb| rgb == [10, 20, 30])
+            .as_chunks::<3>()
+            .0
+            .iter()
+            .all(|rgb| *rgb == [10, 20, 30])
     );
-    assert!(resized.mask8.chunks_exact(16).all(|row| {
+    assert!(resized.mask8.as_chunks::<16>().0.iter().all(|row| {
         row.iter().take(8).all(|&value| value == 17)
             && row.iter().skip(8).all(|&value| value == 204)
     }));

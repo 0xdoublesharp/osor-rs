@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 # rustup otherwise selects from the caller's cwd, even with --manifest-path.
-export RUSTUP_TOOLCHAIN=1.95.0
+export RUSTUP_TOOLCHAIN=1.99.1
 osor_scratch="${OSOR_SCRATCH_ROOT:-/Volumes/Scratch/osor-rs}"
 if [ -z "${OSOR_SCRATCH_ROOT:-}" ] && [ ! -d /Volumes/Scratch ]; then
     echo "Scratch is not mounted; refusing to place build output on Data." >&2

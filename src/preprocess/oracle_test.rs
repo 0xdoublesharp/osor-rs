@@ -18,18 +18,15 @@ fn integer(input: &mut &[u8]) -> Result<u32> {
 }
 
 fn floats(bytes: &[u8]) -> Result<Vec<f32>> {
-    let chunks = bytes.chunks_exact(4);
-    if !chunks.remainder().is_empty() {
+    let (chunks, remainder) = bytes.as_chunks::<4>();
+    if !remainder.is_empty() {
         return Err(Error::InvalidInput("invalid oracle float bytes".into()));
     }
     let mut values = Vec::new();
     values
         .try_reserve_exact(chunks.len())
         .map_err(|_| Error::InvalidInput("cannot allocate oracle float values".into()))?;
-    for chunk in chunks {
-        let bits: [u8; 4] = chunk
-            .try_into()
-            .map_err(|_| Error::InvalidInput("invalid oracle float".into()))?;
+    for &bits in chunks {
         values.push(f32::from_le_bytes(bits));
     }
     Ok(values)

@@ -1,6 +1,6 @@
 # Platforms and build checks
 
-CPU is the default build on macOS, Linux, and Windows. Rust 1.95.0 is pinned in
+CPU is the default build on macOS, Linux, and Windows. Rust 1.99.1 is pinned in
 `rust-toolchain.toml`. CI is configured to run formatting, strict Clippy on all targets, all
 ordinary targets (including compiling the example), and doctests on each host.
 CI also compiles the Metal and Accelerate features on macOS, compiles the CUDA

@@ -239,8 +239,8 @@ mod tests {
             .to_vec1::<f32>()?;
         let biases = [1.0f32, -2.0, 0.5];
         let mut expected = Vec::new();
-        for image in source.chunks_exact(24) {
-            for (plane, &bias) in image.chunks_exact(8).zip(&biases) {
+        for image in source.as_chunks::<24>().0 {
+            for (plane, &bias) in image.as_chunks::<8>().0.iter().zip(&biases) {
                 expected.extend(plane.iter().map(|value| value + bias));
             }
         }
