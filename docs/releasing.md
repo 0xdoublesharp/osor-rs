@@ -35,7 +35,7 @@ email on crates.io first. The token is used only by the upload job.
 
 After the crate exists, configure its
 [trusted publisher](https://crates.io/docs/trusted-publishing) for repository
-`doublesharp/osor-rs` and workflow `publish.yml`, then remove the repository
+`0xdoublesharp/osor-rs` and workflow `publish.yml`, then remove the repository
 token. With no token configured, the workflow obtains a short-lived credential
 through `rust-lang/crates-io-auth-action` instead.
 

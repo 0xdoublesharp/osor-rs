@@ -5,7 +5,7 @@
 //!
 //! # Quick start
 //!
-//! Load a [prepared bundle](https://github.com/doublesharp/osor-rs/blob/main/docs/model-preparation.md),
+//! Load a [prepared bundle](https://github.com/0xdoublesharp/osor-rs/blob/main/docs/model-preparation.md),
 //! generate reproducible noise, and run inference with normalized RGB and mask tensors:
 //!
 //! ```no_run
@@ -37,7 +37,7 @@
 //! CPU is the default. Enable `metal`, `cuda`, or `wgpu` and select a [`Backend`]
 //! through [`Osor::builder`] for GPU execution. [`preprocess`] provides RGB8/mask
 //! resizing, tensor padding, output quantization and optional alpha compositing.
-//! See the [usage guide](https://github.com/doublesharp/osor-rs#use-from-rust)
+//! See the [usage guide](https://github.com/0xdoublesharp/osor-rs#use-from-rust)
 //! for backend setup and input/output details.
 #![forbid(unsafe_code)]
 
