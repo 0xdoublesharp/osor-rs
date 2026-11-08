@@ -91,7 +91,6 @@ jobs:
     env:
       TAG: ${{ inputs.tag }}
       SOURCE_SHA: ${{ needs.release.outputs.sha }}
-      HAS_PUBLISH_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN != '' }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -103,11 +102,11 @@ jobs:
         run: |
           git fetch --force origin "refs/tags/$TAG:refs/tags/$TAG"
           test "$(git rev-parse "$TAG^{commit}")" = "$SOURCE_SHA"
+      # crates.io trusted publishing: a short-lived token, revoked when the job ends.
       - uses: rust-lang/crates-io-auth-action@v1
         id: auth
-        if: env.HAS_PUBLISH_TOKEN != 'true'
       - name: Publish to crates.io
         run: ./scripts/cargo.sh publish --locked
         env:
           OSOR_SCRATCH_ROOT: ${{ runner.temp }}/osor-rs
-          CARGO_REGISTRY_TOKEN: ${{ steps.auth.outputs.token || secrets.CARGO_REGISTRY_TOKEN }}
+          CARGO_REGISTRY_TOKEN: ${{ steps.auth.outputs.token }}

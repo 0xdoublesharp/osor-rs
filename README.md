@@ -49,7 +49,7 @@ and [changelog](CHANGELOG.md).
 
 ```toml
 [dependencies.osor]
-git = "https://github.com/doublesharp/osor-rs"
+git = "https://github.com/0xdoublesharp/osor-rs"
 tag = "v0.1.0"
 # features = ["metal"]
 ```
