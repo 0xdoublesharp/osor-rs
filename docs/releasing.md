@@ -29,15 +29,12 @@ Git consumers such as PhotoCraft keep their resolved source in `Cargo.lock`.
 
 ## Authentication
 
-For the first publication, add a crates.io API token that can create `osor` as
-the repository secret `CARGO_REGISTRY_TOKEN`. Verify the publishing account's
-email on crates.io first. The token is used only by the upload job.
-
-After the crate exists, configure its
-[trusted publisher](https://crates.io/docs/trusted-publishing) for repository
-`0xdoublesharp/osor-rs` and workflow `publish.yml`, then remove the repository
-token. With no token configured, the workflow obtains a short-lived credential
-through `rust-lang/crates-io-auth-action` instead.
+The upload job publishes with crates.io
+[trusted publishing](https://crates.io/docs/trusted-publishing). The `osor`
+crate's trusted publisher on crates.io must name repository
+`0xdoublesharp/osor-rs` and workflow `publish.yml`. `rust-lang/crates-io-auth-action` exchanges the job's OIDC token
+for a short-lived crates.io token and revokes it when the job ends. The
+repository stores no registry token.
 
 ## Package and documentation
 
